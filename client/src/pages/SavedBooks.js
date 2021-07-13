@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
@@ -6,39 +6,13 @@ import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap
 import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
-  const { load, data} = useQuery(GET_ME);
-  const [userData, setData] = useState(load ? null : data.me);
-  const [removeBook, {error}] = useMutation(REMOVE_BOOK);
-
-  // useEffect(() => {
-  //   const getUserData = async () => {
-  //     try {
-  //       const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-  //       if (!token) {
-  //         return false;
-  //       }
-
-  //       const response = await getMe(token);
-
-  //       if (!response.ok) {
-  //         throw new Error('something went wrong!');
-  //       }
-
-  //       const user = await response.json();
-  //       setUserData(user);
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   };
-
-  //   getUserData();
-  // }, [userDataLength]);
+  const { loading, data} = useQuery(GET_ME);
+  const [userData, setData] = useState(loading ? null : data.me);
+  const [removeBook] = useMutation(REMOVE_BOOK);
 
   if(!userData) {
     return null
   }
-
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
     try {
@@ -66,12 +40,12 @@ const SavedBooks = () => {
       </Jumbotron>
       <Container>
         <h2>
-          {!load && userData.savedBooks.length
+          {!loading && userData.savedBooks.length
             ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}:`
             : 'You have no saved books!'}
         </h2>
         <CardColumns>
-          {!load && userData.savedBooks.map((book) => {
+          {!loading && userData.savedBooks.map((book) => {
             return (
               <Card key={book.bookId} border='dark'>
                 {book.image ? <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' /> : null}
