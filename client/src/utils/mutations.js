@@ -35,9 +35,8 @@ mutation saveBook($authors: [String], $description: String, $title: String, $boo
             image
             link
         }
-        }
+      }
     }
-}
 `;
 export const REMOVE_BOOK = gql`
 mutation removeBook($bookId: String!) {
@@ -53,5 +52,4 @@ mutation removeBook($bookId: String!) {
         }
         }
     }
-}
 `;
