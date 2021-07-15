@@ -7,6 +7,8 @@ import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
 
 const client = new ApolloClient({
+  // cache: new InMemoryCache(),
+  uri: '/graphql',
   request: operation => {
     const token = localStorage.getItem('id_token');
     operation.setContext({
@@ -15,7 +17,6 @@ const client = new ApolloClient({
       }
     });
   },
-  uri: '/graphql'
 });
 
 function App() {
