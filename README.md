@@ -32,7 +32,7 @@ Utilizes the following technologies:
 
 ## Usage
 
-My files can be accessed in the repository [HERE](https://github.com/arcangyl1963/googlebooks-search-app)<br>
+My files can be accessed in the repository [HERE](https://github.com/arcangyl1963/google-book-search-engine)<br>
 
 The image below shows the repository where my project files are located:<br>
 
